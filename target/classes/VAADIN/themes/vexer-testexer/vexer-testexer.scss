@@ -1,0 +1,17 @@
+@mixin vexer-testexer {
+
+	/*
+	* Vaadin provides an effective way of importing add-on themes but does not 
+	* provide any automatic name-spacing. You should prefix all your 
+	* rules with testexer to avoid any conflicts.
+	*/
+
+	.testexer-answer {
+		color: green;
+	}
+
+	.testexer-title {
+		font-size: 24px;
+		font-weight: stronger;
+	}
+}

@@ -120,6 +120,9 @@ public class TestExerEditor extends HorizontalLayout implements
             oldResolution = "1";
         }
 
+        HorizontalLayout mainLayout = new HorizontalLayout();
+        mainLayout.setSizeFull();
+        HorizontalLayout halfLayout = new HorizontalLayout();
         VerticalLayout controlsLayout = new VerticalLayout();
         controlsLayout.setWidth("400px");
 
@@ -135,34 +138,42 @@ public class TestExerEditor extends HorizontalLayout implements
                     }
                 }));
 
-        this.addComponent(controlsLayout);
+        halfLayout.addComponent(controlsLayout);
 
-        VerticalLayout editlayout = new VerticalLayout();
+        VerticalLayout editLayout = new VerticalLayout();
 
         Label questionTextCapt = new Label(
                 localizer.getUIText(TestExerUiConstants.QUESTION));
         questionTextCapt.addStyleName(TestExerThemeConsts.TITLE_STYLE);
 
-        editlayout.addComponent(questionTextCapt);
+        editLayout.addComponent(questionTextCapt);
 
         questionText = new TextField(null, oldQuestion);
 
-        editlayout.addComponent(questionText);
+        editLayout.addComponent(questionText);
 
         eventStartYear= new TextField("Tapahtumien alkuvuosi", oldStartYear);
-        editlayout.addComponent(eventStartYear);
+        editLayout.addComponent(eventStartYear);
 
         eventEndYear = new TextField("Tapahtumien loppuvuosi", oldEndYear);
-        editlayout.addComponent(eventEndYear);
+        editLayout.addComponent(eventEndYear);
 
         eventResolution = new TextField("Tapahtumien tarkkuus", oldResolution);
-        editlayout.addComponent(eventResolution);
+        editLayout.addComponent(eventResolution);
+        editLayout.setWidth("200px");
+        editLayout.setMargin(true);
 
-        this.addComponent(editlayout);
+        halfLayout.addComponent(editLayout);
+        
+        mainLayout.addComponent(halfLayout);
 
         eventTable.setEditable(true);
+		eventTable.setStyleName("myText-theme");
 		eventTable.addContainerProperty("Tapahtuma", String.class,  null);
 		eventTable.addContainerProperty("Vuosi", String.class,  null);
+		eventTable.setSizeFull();
+		eventTable.setColumnWidth("Tapahtuma", 500);
+		eventTable.setColumnWidth("Vuosi", 100);
         if (oldData != null) {
         	ArrayList<String> eList = oldData.getEventList();
         	ArrayList<Integer> aList = oldData.getAnswerList();
@@ -183,7 +194,9 @@ public class TestExerEditor extends HorizontalLayout implements
 				eventTable.addItem(new Object[] {"", ""}, new Integer(i));
 			}
         }
+        eventTable.setColumnExpandRatio("Tapahtuma", 1.0f);
 
-		this.addComponent(eventTable);
+        mainLayout.addComponent(eventTable);
+		this.addComponent(mainLayout);
     }
 }

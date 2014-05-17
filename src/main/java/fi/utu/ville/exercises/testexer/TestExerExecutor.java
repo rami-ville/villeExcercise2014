@@ -109,9 +109,12 @@ public class TestExerExecutor extends VerticalLayout implements
 		answerTable.setWidth("200px");
 		answerTable.addContainerProperty("Vuosi", String.class,  null);
 		if (oldAnswer != null) {
-			for (int i = 0; i < eventCount; i++) {
+			for (int i = 0; i < oldAnswer.getEventCount(); i++) {
 				answerTable.addItem(new Object[] {oldAnswer.getEventAnswer(i)}, new Integer(i));
 			}
+			for (int i = oldAnswer.getEventCount(); i < eventCount; i++) {
+				answerTable.addItem(new Object[] {"Valitse vuosi?"}, new Integer(i));
+			}			
 		} else {
 			for (int i = 0; i < eventCount; i++) {
 				answerTable.addItem(new Object[] {"Valitse vuosi?"}, new Integer(i));
